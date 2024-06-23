@@ -9,6 +9,9 @@ readme = "README.md"
 python = "^3.12"
 django = "^5.0.6"
 include = "^0.2.2"
+psycopg2-binary = "^2.9.9"
+ipython = "^8.25.0"
+pillow = "^10.3.0"
 
 
 [build-system]
