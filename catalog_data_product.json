@@ -44,7 +44,7 @@
     "fields": {
       "name": "Sony",
       "description": "Japan headphones",
-      "image": "dz_20_2.png",
+      "image": "",
       "category": 3,
       "price": 400,
       "create_at": "2024-06-24",
