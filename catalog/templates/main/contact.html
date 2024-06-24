@@ -270,54 +270,80 @@
             <form class="col-8">
                 <div class="card">
                     <div class="card-body">
-                        <table class="table">
-                            <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Страна</td>
-                                <td>Россия</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>ИНН</td>
-                                <td>89111111111</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Адрес</td>
-                                <td>г. Санкт-Петербург, Невский пр. 1</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">4</th>
-                                <td>Номер телефона</td>
-                                <td>89999191919</td>
-                            </tr>
-                            </tbody>
-                        </table>
+                        <p>
+                            {% if object_list %}
+                        <ul>
+                            {% for contact in object_list %}
+                            <table class="table">
+                                <tbody>
+                                <tr>
+                                    <th scope="row">{{ contact.pk }}</th>
+                                    <td>Страна</td>
+                                    <td>
+                                        <li>
+                                            {{ contact.country }}
+                                        </li>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"></th>
+                                    <td>ИНН</td>
+                                    <td>
+                                        <li>
+                                            {{ contact.inn }}
+                                        </li>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"></th>
+                                    <td>Адрес</td>
+                                    <td>
+                                        <li>
+                                            {{ contact.address }}
+                                        </li>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"></th>
+                                    <td>Номер телефона</td>
+                                    <td>
+                                        <li>
+                                            {{ contact.phone_number }}
+                                        </li>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            {% endfor %}
+                        </ul>
+                        {% else %}
+                        <p>Нет доступных контактов</p>
+                        {% endif %}
+                        </p>
                     </div>
                 </div>
             </form>
-                <form class="col-4" method="post">
-                    <div class="card">
-                        <div class="card-body">
-                            {% csrf_token %}
-                            <div class="mb-3">
-                                <label for="exampleInputName" class="form-label">Имя</label>
-                                <input name="name" type="text" class="form-control" id="exampleInputName">
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">E-mail</label>
-                                <input name="email" type="email" class="form-control" id="exampleInputEmail1"
-                                       aria-describedby="emailHelp">
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleFormControlTextarea1" class="form-label">Обращение</label>
-                                <textarea name="massage" class="form-control" id="exampleFormControlTextarea1"
-                                          rows="3"></textarea>
-                            </div>
-                            <button type="submit" name="btnsend" class="btn btn-primary">Отправить</button>
+            <form class="col-4" method="post">
+                <div class="card">
+                    <div class="card-body">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="exampleInputName" class="form-label">Имя</label>
+                            <input name="name" type="text" class="form-control" id="exampleInputName">
                         </div>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">E-mail</label>
+                            <input name="email" type="email" class="form-control" id="exampleInputEmail1"
+                                   aria-describedby="emailHelp">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlTextarea1" class="form-label">Обращение</label>
+                            <textarea name="massage" class="form-control" id="exampleFormControlTextarea1"
+                                      rows="3"></textarea>
+                        </div>
+                        <button type="submit" name="btnsend" class="btn btn-primary">Отправить</button>
                     </div>
+                </div>
             </form>
         </main>
     </div>

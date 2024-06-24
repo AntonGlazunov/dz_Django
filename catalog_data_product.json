@@ -63,5 +63,18 @@
       "create_at": "2024-06-24",
       "updated_at": "2024-06-24"
     }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 6,
+    "fields": {
+      "name": "Sony",
+      "description": "Japan TV",
+      "image": "",
+      "category": 2,
+      "price": 1000,
+      "create_at": "2024-06-24",
+      "updated_at": "2024-06-24"
+    }
   }
 ]

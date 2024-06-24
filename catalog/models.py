@@ -30,3 +30,18 @@ class Category(models.Model):
     class Meta:
         verbose_name = 'Категория'
         verbose_name_plural = 'Категории'
+
+
+class Contact(models.Model):
+    country = models.CharField(max_length=100, verbose_name='Страна')
+    inn = models.BigIntegerField(verbose_name='ИНН')
+    address = models.CharField(max_length=100, verbose_name='Адрес')
+    phone_number = models.BigIntegerField(verbose_name='Номер телефона')
+
+    def __str__(self):
+        return f'{self.country} {self.inn} {self.address} {self.phone_number}'
+
+    class Meta:
+        verbose_name = 'Контакт'
+        verbose_name_plural = 'Контакты'
+
