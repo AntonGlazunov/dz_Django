@@ -1,0 +1,67 @@
+[
+  {
+    "model": "catalog.product",
+    "pk": 1,
+    "fields": {
+      "name": "iPhone",
+      "description": "USA phone",
+      "image": "",
+      "category": 1,
+      "price": 1000,
+      "create_at": "2024-06-24",
+      "updated_at": "2024-06-24"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 2,
+    "fields": {
+      "name": "Galaxy",
+      "description": "Korea phone",
+      "image": "",
+      "category": 1,
+      "price": 800,
+      "create_at": "2024-06-24",
+      "updated_at": "2024-06-24"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 3,
+    "fields": {
+      "name": "LG",
+      "description": "Korea TV",
+      "image": "",
+      "category": 2,
+      "price": 1500,
+      "create_at": "2024-06-24",
+      "updated_at": "2024-06-24"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 4,
+    "fields": {
+      "name": "Sony",
+      "description": "Japan headphones",
+      "image": "dz_20_2.png",
+      "category": 3,
+      "price": 400,
+      "create_at": "2024-06-24",
+      "updated_at": "2024-06-24"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 5,
+    "fields": {
+      "name": "Samsung",
+      "description": "Korea TV",
+      "image": "",
+      "category": 2,
+      "price": 1000,
+      "create_at": "2024-06-24",
+      "updated_at": "2024-06-24"
+    }
+  }
+]
