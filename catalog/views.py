@@ -34,6 +34,7 @@ class ContactListView(generic.ListView):
     model = Contact
     template_name = 'main/contact.html'
 
+
     def get_context_data(self, **kwargs):
         context = super(ContactListView, self).get_context_data(**kwargs)
         context['contact_list'] = Contact.objects.all()
