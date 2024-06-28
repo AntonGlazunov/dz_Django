@@ -70,7 +70,7 @@
     "fields": {
       "name": "Sony",
       "description": "Japan TV",
-      "image": "",
+      "image": "product/dz_20_2.png",
       "category": 2,
       "price": 1000,
       "create_at": "2024-06-24",
