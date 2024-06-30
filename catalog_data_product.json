@@ -5,7 +5,7 @@
     "fields": {
       "name": "iPhone",
       "description": "USA phone",
-      "image": "",
+      "image": "product/iphone.jpg",
       "category": 1,
       "price": 1000,
       "create_at": "2024-06-24",
@@ -18,7 +18,7 @@
     "fields": {
       "name": "Galaxy",
       "description": "Korea phone",
-      "image": "",
+      "image": "product/samsung.jpg",
       "category": 1,
       "price": 800,
       "create_at": "2024-06-24",
@@ -31,7 +31,7 @@
     "fields": {
       "name": "LG",
       "description": "Korea TV",
-      "image": "",
+      "image": "product/lg_tv.jpg",
       "category": 2,
       "price": 1500,
       "create_at": "2024-06-24",
@@ -44,7 +44,7 @@
     "fields": {
       "name": "Sony",
       "description": "Japan headphones",
-      "image": "",
+      "image": "product/sony_wh.jpg",
       "category": 3,
       "price": 400,
       "create_at": "2024-06-24",
@@ -56,8 +56,8 @@
     "pk": 5,
     "fields": {
       "name": "Samsung",
-      "description": "Korea TV",
-      "image": "",
+      "description": "Korea TV this very very good tv Точная цветопередача оживляет изображение\nЭта технология обеспечивает вывод на экран богатой палитры цветовых оттенков,\nблагодаря чему зритель испытывает эффект полного погружения в действие на экране. Масштабирование до 4К\nСмотрите свой любимый контент в формате 4K\nТехнология масштабирования разрешения до 4K гарантирует, что вы будете смотреть ваш любимый контент в высочайшем качестве. Операционная система Samsung Tizen\nНовый опыт развлечений с ОС Tizen\nПолучите еще больше удовольствия от просмотра ТВ с помощью новейших приложений и сервисов в телевизорах с ОС Samsung Tizen. Вы можете управлять своими повседневными делами с помощью функции Daily+, а также контролировать состояние ваших смарт-устройств с экрана телевизора с помощью приложения SmartThings. Функция Q-Symphony\nОдновременное звучание динамиков ТВ и саундбара\nГармоничный звук от телевизора и саундбара заполнит каждый уголок пространства. \u200FБлагодаря уникальной функции Q-Symphony, звук от телевизора и саундбара синхронизируется, позволяя наслаждаться объемным звуком без отключения динамиков ТВ.",
+      "image": "product/samsung_tv.jpg",
       "category": 2,
       "price": 1000,
       "create_at": "2024-06-24",
@@ -70,7 +70,7 @@
     "fields": {
       "name": "Sony",
       "description": "Japan TV",
-      "image": "product/dz_20_2.png",
+      "image": "product/sony_tv.jpg",
       "category": 2,
       "price": 1000,
       "create_at": "2024-06-24",

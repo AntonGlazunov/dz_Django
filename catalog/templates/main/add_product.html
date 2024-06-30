@@ -1,0 +1,42 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<header>
+    <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+        <h1 class="display-4 fw-normal text-body-emphasis">Добавление товаров</h1>
+        <p class="fs-5 text-body-secondary">Вы находитесь на странице для добавления товаров</p>
+    </div>
+</header>
+<form method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="exampleInputName" class="form-label">Наименование</label>
+        <input type="text" name="name" class="form-control" id="exampleInputName">
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputDescription" class="form-label">Описание</label>
+        <input type="text" name="description" class="form-control" id="exampleInputDescription">
+    </div>
+    <div class="mb-3">
+        <input class="form-control" name="image" type="file" id="formFile">
+    </div>
+    <div class="mb-3">
+        {% for category in category_list %}
+        <ul class="list-group">
+            <li class="list-group-item">
+                <input class="form-check-input me-1" type="radio" name="category" value="" id="firstRadio"
+                       checked>
+                <label class="form-check-label" for="firstRadio">{{ category.name }}</label>
+            </li>
+        </ul>
+        {% endfor %}
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputPrice" class="form-label">Стоимость</label>
+        <input type="number" name="price" class="form-control" id="exampleInputPrice">
+    </div>
+    <div class="mb-3">
+        <button type="submit" name="add" class="btn btn-primary">Добавить</button>
+    </div>
+</form>
+{% endblock %}
