@@ -1,16 +1,13 @@
 from django.shortcuts import render
+from django.views.generic import ListView
 
 from catalog.models import Product, Contact, Category
 
 
-def home(request):
-    prod_list = Product.objects.all()
-    context = {
-        'object_list': prod_list
-    }
-    if request.method == 'GET':
-        print(f'{prod_list}')
-    return render(request, 'main/home.html', context)
+class ProductListView(ListView):
+    model = Product
+
+
 
 
 def contact(request):
@@ -34,19 +31,19 @@ def product(request, pk):
 
 def add_product(request):
     category_list = Category.objects.all()
+    # try:
     context = {
         'category_list': category_list
     }
     if request.method == 'POST':
-        name = request.POST.get("name"),
-        description = request.POST.get("description"),
-        image = request.POST.get("image"),
-        category = request.POST.get("category"),
-        price = request.POST.get("price")
-        print(f'{name} {description} {image} {category} {price}')
-        # Product.objects.create(name=request.POST.get("name"),
-        #                        description=request.POST.get("description"),
-        #                        image=request.POST.get("image"),
-        #                        category=request.POST.get("category"),
-        #                        price=request.POST.get("price"))
+        Product.objects.create(name=request.POST.get("name"),
+                               description=request.POST.get("description"),
+                               image=request.POST.get("image"),
+                                category=request.POST.get("category"),
+                               price=request.POST.get("price"))
     return render(request, 'main/add_product.html', context)
+    # except:
+    #     context = {
+    #         'category_list': category_list
+    #     }
+    #     return render(request, 'main/add_product.html', context)

@@ -13,7 +13,7 @@
         <div class="card m-2">
             <h5 class="card-header">Хотите купить?</h5>
             <div class="card-body">
-                <h5 class="card-title"><a href="home/{{ product.pk }}">{{ product.name }}</a>
+                <h5 class="card-title"><a href="{% url 'product_detail' product.pk %}">{{ product.name }}</a>
                 </h5>
                 <p class="card-text">{{ product.description | format_str }}</p>
                 <a href="#" class="btn btn-primary">{{ product.price }}</a>

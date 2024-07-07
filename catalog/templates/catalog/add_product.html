@@ -7,7 +7,7 @@
         <p class="fs-5 text-body-secondary">Вы находитесь на странице для добавления товаров</p>
     </div>
 </header>
-<form method="post">
+<form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="mb-3">
         <label for="exampleInputName" class="form-label">Наименование</label>
@@ -21,15 +21,10 @@
         <input class="form-control" name="image" type="file" id="formFile">
     </div>
     <div class="mb-3">
-        {% for category in category_list %}
-        <ul class="list-group">
-            <li class="list-group-item">
-                <input class="form-check-input me-1" type="radio" name="category" value="" id="firstRadio"
-                       checked>
-                <label class="form-check-label" for="firstRadio">{{ category.name }}</label>
-            </li>
-        </ul>
-        {% endfor %}
+        <div class="mb-3">
+            <label for="exampleInputCategory" class="form-label">Категория</label>
+            <input type="text" name="category" class="form-control" id="exampleInputCategory">
+        </div>
     </div>
     <div class="mb-3">
         <label for="exampleInputPrice" class="form-label">Стоимость</label>

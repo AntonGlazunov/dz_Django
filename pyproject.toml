@@ -12,6 +12,7 @@ include = "^0.2.2"
 psycopg2-binary = "^2.9.9"
 ipython = "^8.25.0"
 pillow = "^10.3.0"
+pytils = "^0.4.1"
 
 
 [build-system]
