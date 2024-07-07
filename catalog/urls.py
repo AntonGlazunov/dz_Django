@@ -2,11 +2,11 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path
 
-from catalog.views import contact, product, add_product, ProductListView
+from catalog.views import contact, ProductListView, ProductDetailView, ProductCreateView
 
 urlpatterns = [
     path('', ProductListView.as_view(), name='product_list'),
-    path('home/contact', contact, name='contact'),
-    path('home/<int:pk>', product, name='product_detail'),
-    path('home/add_prod', add_product, name='add_product'),
+    path('contact', contact, name='contact'),
+    path('<int:pk>', ProductDetailView.as_view(), name='product_detail'),
+    path('product_form', ProductCreateView.as_view(), name='add_product'),
 ]
