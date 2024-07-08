@@ -50,6 +50,7 @@ class UserFeedback(models.Model):
     name = models.CharField(max_length=100, verbose_name='Имя')
     email = models.EmailField(verbose_name='e-mail')
     massage = models.TextField(verbose_name='текст обращения')
+    is_active = models.BooleanField(default=True, verbose_name='активное обращение')
 
     class Meta:
         verbose_name = 'Обращение'

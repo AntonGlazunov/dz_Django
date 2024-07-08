@@ -5,7 +5,7 @@ from catalog.models import Product, Category, Contact, UserFeedback
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'price', 'category', 'image')
+    list_display = ('id', 'name', 'price', 'category', 'image', 'create_at', 'updated_at')
     list_filter = ('category',)
     search_fields = ('name', 'description',)
 
@@ -22,4 +22,4 @@ class ContactAdmin(admin.ModelAdmin):
 
 @admin.register(UserFeedback)
 class UserFeedbackAdmin(admin.ModelAdmin):
-    list_display = ('name', 'email', 'massage')
+    list_display = ('name', 'email', 'massage', 'is_active')

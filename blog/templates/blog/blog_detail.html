@@ -1,0 +1,33 @@
+{% extends 'blog/base.html' %}
+{% load my_tags %}
+{% block content %}
+<header>
+    <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+        <h1 class="display-4 fw-normal text-body-emphasis">{{ object.title }}</h1>
+        <p class="fs-5 text-body-secondary">({{ object.slug }})</p>
+    </div>
+</header>
+
+<main>
+    <div class="row">
+        <div class="col-3">
+            <img src="{{ object.image | media_filter }}" width="600" height="600" class="img-thumbnail"
+                 alt="Изображение ненайдено">
+        </div>
+        <div class="col-9">
+            <div class="card">
+                <div class="card-header">
+                    {{ object.title }}
+                </div>
+                <div class="card-body">
+                    <blockquote class="blockquote mb-0">
+                        <p>{{ object.content }}</p>
+                        <footer class="blockquote-footer">Просмотры:<cite
+                                title="Source Title">{{ object.views_count }}</cite></footer>
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

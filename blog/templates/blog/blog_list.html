@@ -1,0 +1,27 @@
+{% extends 'blog/base.html' %}
+{% load my_tags %}
+{% block content %}
+<header>
+    <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+        <h1 class="display-4 fw-normal text-body-emphasis">Главная</h1>
+        <p class="fs-5 text-body-secondary">Вы находитесь на сайте для размещения личных блогов</p>
+    </div>
+</header>
+<main class="row">
+    {% for blog in object_list %}
+    <div class="col-sm-6">
+        <div class="card w-75" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">{{ blog.title }}</h5>
+                <p class="card-text">{{ blog.content | format_str }}</p>
+                <div class="btn-group">
+                    <a href="{% url 'blog_detail' blog.pk %}" class="btn btn-primary active" aria-current="page">Прочитать</a>
+                    <a href="{% url 'update_blog' blog.pk %}" class="btn btn-primary">Отредактировать</a>
+                    <a href="{% url 'delete' blog.pk %}" class="btn btn-primary">Удалить</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</main>
+{% endblock %}
