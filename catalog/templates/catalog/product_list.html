@@ -7,7 +7,7 @@
         <p class="fs-5 text-body-secondary">Вы находитесь на сайте, предназначенном для продажи товаров</p>
     </div>
 </header>
-<main class="row">
+<main class="row g-2">
     {% for product in object_list %}
     <div class="col-3">
         <div class="card m-2">
@@ -16,7 +16,8 @@
                 <h5 class="card-title"><a href="{% url 'product_detail' product.pk %}">{{ product.name }}</a>
                 </h5>
                 <p class="card-text">{{ product.description | format_str }}</p>
-                <a href="#" class="btn btn-primary">{{ product.price }}</a>
+                <a href="{% url 'update_product' product.pk %}" class="btn btn-primary">Обновить информацию</a>
+                <a href="{% url 'delete_product' product.pk %}" class="btn btn-danger">Удалить товар</a>
             </div>
         </div>
     </div>
