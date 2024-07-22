@@ -7,18 +7,25 @@
         <p class="fs-5 text-body-secondary">Вы находитесь на странице для добавления товаров</p>
     </div>
 </header>
-<div class="col-12">
-    <div class="row">
-        <div class="card">
-            <div class="card-body">
-                <form method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
+<form class="row" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+        <div class="col-6">
+            <div class="card">
+                <div class="card-body">
                     {{ form.as_p }}
                     <button type="submit" class="btn btn-success">Сохранить</button>
-
-                </form>
+                </div>
             </div>
         </div>
-    </div>
-</div>
+        <div class="col-6">
+            <div class="card">
+                <div class="card-body">
+                    {{ formset.management_form }}
+                    {% for form in formset.forms %}
+                    {{ form.as_p }}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+</form>
 {% endblock %}

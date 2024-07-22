@@ -55,3 +55,14 @@ class UserFeedback(models.Model):
     class Meta:
         verbose_name = 'Обращение'
         verbose_name_plural = 'Обращения'
+
+
+class Version(models.Model):
+    product = models.ForeignKey(Product, verbose_name='продукт', on_delete=models.CASCADE)
+    version_number = models.IntegerField(verbose_name='номер версии')
+    version_name = models.CharField(max_length=100, verbose_name='Название версии', unique=True)
+    is_active = models.BooleanField(default=True, verbose_name='признак текущей версии')
+
+    class Meta:
+        verbose_name = 'Версия'
+        verbose_name_plural = 'Версии'

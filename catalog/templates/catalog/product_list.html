@@ -8,7 +8,7 @@
     </div>
 </header>
 <main class="row g-2">
-    {% for product in object_list %}
+    {% for product in versions %}
     <div class="col-3">
         <div class="card m-2">
             <h5 class="card-header">Хотите купить?</h5>
@@ -16,6 +16,7 @@
                 <h5 class="card-title"><a href="{% url 'product_detail' product.pk %}">{{ product.name }}</a>
                 </h5>
                 <p class="card-text">{{ product.description | format_str }}</p>
+                <p class="card-text">{{ product.new_version_product }}</p>
                 <a href="{% url 'update_product' product.pk %}" class="btn btn-primary">Обновить информацию</a>
                 <a href="{% url 'delete_product' product.pk %}" class="btn btn-danger">Удалить товар</a>
             </div>

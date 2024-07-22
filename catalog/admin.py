@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from catalog.models import Product, Category, Contact, UserFeedback
+from catalog.models import Product, Category, Contact, UserFeedback, Version
 
 
 @admin.register(Product)
@@ -23,3 +23,8 @@ class ContactAdmin(admin.ModelAdmin):
 @admin.register(UserFeedback)
 class UserFeedbackAdmin(admin.ModelAdmin):
     list_display = ('name', 'email', 'massage', 'is_active')
+
+
+@admin.register(Version)
+class VersionAdmin(admin.ModelAdmin):
+    list_display = ('product', 'version_number', 'version_name', 'is_active')
