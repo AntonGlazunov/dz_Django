@@ -54,5 +54,5 @@ class VersionForm(VisualFormMixin, forms.ModelForm):
         cleaned_data = self.cleaned_data.get('product')
         is_active_version_product = Version.objects.filter(is_active=True, product=Product.objects.get(pk=cleaned_data.pk))
         if len(is_active_version_product) > 1:
-            raise forms.ValidationError('Ошибка, используется запрещенное описание')
+            raise forms.ValidationError('Ошибка, может быть одна активная версия')
         return cleaned_data
