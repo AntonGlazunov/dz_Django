@@ -34,8 +34,25 @@ class ProductForm(VisualFormMixin, forms.ModelForm):
 
         return cleaned_data
 
+    def clean_description(self):
+        cleaned_data = self.cleaned_data.get('description')
+
+        if cleaned_data.lower() in ['казино', 'криптовалюта', 'крипта', 'биржа', 'дешево', 'бесплатно', 'обман',
+                                    'полиция', 'радар']:
+            raise forms.ValidationError('Ошибка, используется запрещенное описание')
+
+        return cleaned_data
+
 
 class VersionForm(VisualFormMixin, forms.ModelForm):
+
     class Meta:
         model = Version
         fields = '__all__'
+
+    def clean_version_number(self):
+        cleaned_data = self.cleaned_data.get('product')
+        is_active_version_product = Version.objects.filter(is_active=True, product=Product.objects.get(pk=cleaned_data.pk))
+        if len(is_active_version_product) > 1:
+            raise forms.ValidationError('Ошибка, используется запрещенное описание')
+        return cleaned_data

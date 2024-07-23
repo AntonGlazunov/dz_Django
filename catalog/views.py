@@ -44,14 +44,9 @@ class ProductUpdateView(UpdateView):
 
     def form_valid(self, form):
         formset = self.get_context_data()['formset']
-        self.object = form.save()
         if formset.is_valid():
             formset.instance = self.object
             formset.save()
-        is_active_version = Version.objects.filter(is_active=True, product=Product.objects.get(pk=self.object.pk))
-        if len(is_active_version) > 1:
-            form.add_error(None, 'У продукта не может быть более одной активной версии.')
-            return self.form_invalid(form)
         return super().form_valid(form)
 
     def get_success_url(self):
