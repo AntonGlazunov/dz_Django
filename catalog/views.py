@@ -25,8 +25,8 @@ class ProductDetailView(DetailView):
 
 class ProductCreateView(CreateView):
     model = Product
-    fields = ('name', 'description', 'image', 'category', 'price')
     success_url = reverse_lazy('product_list')
+    form_class = ProductForm
 
 
 class ProductUpdateView(UpdateView):
@@ -48,6 +48,10 @@ class ProductUpdateView(UpdateView):
         if formset.is_valid():
             formset.instance = self.object
             formset.save()
+        is_active_version = Version.objects.filter(is_active=True, product=Product.objects.get(pk=self.object.pk))
+        if len(is_active_version) > 1:
+            form.add_error(None, 'У продукта не может быть более одной активной версии.')
+            return self.form_invalid(form)
         return super().form_valid(form)
 
     def get_success_url(self):
