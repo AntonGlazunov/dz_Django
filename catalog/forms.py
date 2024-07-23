@@ -1,6 +1,5 @@
-from crispy_forms.bootstrap import InlineCheckboxes
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Fieldset, Submit, Field
+from crispy_forms.layout import Layout, Fieldset, Submit
 from django import forms
 
 from catalog.models import Product, Version
@@ -22,7 +21,6 @@ class ProductForm(VisualFormMixin, forms.ModelForm):
             Fieldset('Товар', 'name', 'description'), Submit('submit', 'Сохранить', css_class='btn btn-success'),
         )
 
-
     class Meta:
         model = Product
         fields = ('name', 'description', 'image',)
@@ -38,7 +36,6 @@ class ProductForm(VisualFormMixin, forms.ModelForm):
 
 
 class VersionForm(VisualFormMixin, forms.ModelForm):
-
     class Meta:
         model = Version
         fields = '__all__'
