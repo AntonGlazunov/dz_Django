@@ -17,7 +17,7 @@
                         <h5 class="card-title">Хотите удалить продукт {{ object.title }}? </h5>
                         {% csrf_token %}
                         <button type="submit" class="btn btn-danger active">Удалить</button>
-                        <a href="{% url 'product_list' %}" class="btn btn-success active">Отмена</a>
+                        <a href="{% url 'catalog:product_list' %}" class="btn btn-success active">Отмена</a>
                     </div>
                 </div>
             </form>

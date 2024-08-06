@@ -10,7 +10,7 @@
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
         <li class="nav-item">
-            <a href="{% url 'product_list' %}" class="nav-link active" aria-current="page">
+            <a href="{% url 'catalog:product_list' %}" class="nav-link active" aria-current="page">
                 <svg class="bi me-2" width="16" height="16">
                     <use xlink:href="#home"/>
                 </svg>
@@ -18,7 +18,7 @@
             </a>
         </li>
         <li>
-            <a href="{% url 'blog_list' %}" class="nav-link text-white">
+            <a href="{% url 'blog:blog_list' %}" class="nav-link text-white">
                 <svg class="bi me-2" width="16" height="16">
                     <use xlink:href="#speedometer2"/>
                 </svg>
@@ -34,7 +34,7 @@
             </a>
         </li>
         <li>
-            <a href="{% url 'contact' %}" class="nav-link text-white">
+            <a href="{% url 'catalog:contact' %}" class="nav-link text-white">
                 <svg class="bi me-2" width="16" height="16">
                     <use xlink:href="#people-circle"/>
                 </svg>
@@ -42,7 +42,7 @@
             </a>
         </li>
         <li>
-            <a href="{% url 'create_product' %}" class="nav-link text-white">
+            <a href="{% url 'catalog:create_product' %}" class="nav-link text-white">
                 <svg class="bi me-2" width="16" height="16">
                     <use xlink:href="#people-circle"/>
                 </svg>
@@ -52,17 +52,11 @@
     </ul>
     <hr>
     <div class="dropdown">
-        <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
-           id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-            <strong>Пользователь</strong>
+        <a href="{% url 'users:login' %}" class="nav-link text-white">
+            <svg class="bi me-2" width="16" height="16">
+                <use xlink:href="#people-circle"/>
+            </svg>
+            Войти
         </a>
-        <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-            <li><a class="dropdown-item" href="#">Профиль</a></li>
-            <li>
-                <hr class="dropdown-divider">
-            </li>
-            <li><a class="dropdown-item" href="#">Выход</a></li>
-        </ul>
     </div>
 </div>
