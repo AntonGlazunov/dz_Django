@@ -1,4 +1,4 @@
-{% extends 'blog/base.html' %}
+{% extends 'catalog/base.html' %}
 
 {% block content %}
 <header>
@@ -17,7 +17,7 @@
                         <h5 class="card-title">Хотите удалить статью {{ object.title }}? </h5>
                             {% csrf_token %}
                             <button type="submit" class="btn btn-danger active">Удалить</button>
-                            <a href="{% url 'blog_list' %}" class="btn btn-success active">Отмена</a>
+                            <a href="{% url 'blog:blog_list' %}" class="btn btn-success active">Отмена</a>
                     </div>
                 </div>
             </form>

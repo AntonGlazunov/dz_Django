@@ -36,7 +36,7 @@ class BlogDetailView(DetailView):
 class BlogCreateView(CreateView):
     model = Blog
     fields = ('title', 'content', 'image', 'is_published')
-    success_url = reverse_lazy('blog_list')
+    success_url = reverse_lazy('blog:blog_list')
 
     def form_valid(self, form):
         if form.is_valid():
@@ -50,7 +50,7 @@ class BlogCreateView(CreateView):
 class BlogUpdateView(UpdateView):
     model = Blog
     fields = ('title', 'content', 'image', 'is_published')
-    success_url = reverse_lazy('blog_list')
+    success_url = reverse_lazy('blog:blog_list')
 
     def form_valid(self, form):
         if form.is_valid():
@@ -61,9 +61,9 @@ class BlogUpdateView(UpdateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse('blog_detail', args=[self.kwargs.get('pk')])
+        return reverse('blog:blog_detail', args=[self.kwargs.get('pk')])
 
 
 class BlogDeleteView(DeleteView):
     model = Blog
-    success_url = reverse_lazy('blog_list')
+    success_url = reverse_lazy('blog:blog_list')

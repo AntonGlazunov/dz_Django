@@ -1,4 +1,4 @@
-{% extends 'blog/base.html' %}
+{% extends 'catalog/base.html' %}
 {% load my_tags %}
 {% block content %}
 <header>
@@ -15,9 +15,9 @@
                 <h5 class="card-title">{{ blog.title }}</h5>
                 <p class="card-text">{{ blog.content | format_str }}</p>
                 <div class="btn-group">
-                    <a href="{% url 'blog_detail' blog.pk %}" class="btn btn-primary active" aria-current="page">Прочитать</a>
-                    <a href="{% url 'update_blog' blog.pk %}" class="btn btn-primary">Отредактировать</a>
-                    <a href="{% url 'delete' blog.pk %}" class="btn btn-primary">Удалить</a>
+                    <a href="{% url 'blog:blog_detail' blog.pk %}" class="btn btn-primary active" aria-current="page">Прочитать</a>
+                    <a href="{% url 'blog:update_blog' blog.pk %}" class="btn btn-primary">Отредактировать</a>
+                    <a href="{% url 'blog:delete' blog.pk %}" class="btn btn-primary">Удалить</a>
                 </div>
             </div>
         </div>

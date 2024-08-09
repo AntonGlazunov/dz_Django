@@ -25,7 +25,7 @@ class ProductDetailView(DetailView):
 
 class ProductCreateView(CreateView):
     model = Product
-    success_url = reverse_lazy('product_list')
+    success_url = reverse_lazy('catalog:product_list')
     form_class = ProductForm
 
     def get_context_data(self, **kwargs):
@@ -68,12 +68,12 @@ class ProductUpdateView(UpdateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse('product_detail', args=[self.kwargs.get('pk')])
+        return reverse('catalog:product_detail', args=[self.kwargs.get('pk')])
 
 
 class ProductDeleteView(DeleteView):
     model = Product
-    success_url = reverse_lazy('product_list')
+    success_url = reverse_lazy('catalog:product_list')
 
 
 def contact(request):
