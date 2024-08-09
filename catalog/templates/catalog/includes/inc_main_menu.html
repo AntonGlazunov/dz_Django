@@ -66,6 +66,11 @@
             </svg>
             Выйти
         </a>
+        <a href="{% url 'users:profile' %}" class="nav-link text-white">
+            <svg class="bi me-2" width="16" height="10">
+            </svg>
+            Редактировать профиль
+        </a>
         {% else %}
         <a href="{% url 'users:login' %}" class="nav-link text-white">
             <svg class="bi me-2" width="16" height="10">
@@ -75,7 +80,7 @@
         <a href="{% url 'users:register' %}" class="nav-link text-white">
             <svg class="bi me-2" width="16" height="10">
             </svg>
-            Зарегестрироваться
+            Зарегистрироваться
         </a>
         {% endif %}
     </div>
