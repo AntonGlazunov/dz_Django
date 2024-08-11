@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin
 from django.core.mail import send_mail
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -33,7 +34,7 @@ class BlogDetailView(DetailView):
         return self.object
 
 
-class BlogCreateView(CreateView):
+class BlogCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Blog
     fields = ('title', 'content', 'image', 'is_published')
     success_url = reverse_lazy('blog:blog_list')
@@ -46,8 +47,12 @@ class BlogCreateView(CreateView):
 
         return super().form_valid(form)
 
+    def test_func(self):
+        user = self.request.user
+        return user.is_content_manager
 
-class BlogUpdateView(UpdateView):
+
+class BlogUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Blog
     fields = ('title', 'content', 'image', 'is_published')
     success_url = reverse_lazy('blog:blog_list')
@@ -63,7 +68,15 @@ class BlogUpdateView(UpdateView):
     def get_success_url(self):
         return reverse('blog:blog_detail', args=[self.kwargs.get('pk')])
 
+    def test_func(self):
+        user = self.request.user
+        return user.is_content_manager
 
-class BlogDeleteView(DeleteView):
+
+class BlogDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Blog
     success_url = reverse_lazy('blog:blog_list')
+
+    def test_func(self):
+        user = self.request.user
+        return user.is_content_manager

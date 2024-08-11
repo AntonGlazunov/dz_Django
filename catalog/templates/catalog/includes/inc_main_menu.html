@@ -49,6 +49,7 @@
                 Добавить продукт
             </a>
         </li>
+        {% if user.is_content_manager %}
         <li>
             <a href="{% url 'blog:add_blog' %}" class="nav-link text-white">
                 <svg class="bi me-2" width="16" height="16">
@@ -57,6 +58,7 @@
                 Добаить статью
             </a>
         </li>
+        {% endif %}
     </ul>
     <hr>
     <div class="dropdown">
