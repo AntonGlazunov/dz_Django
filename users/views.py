@@ -1,8 +1,6 @@
-from random import choices
-from string import ascii_lowercase, ascii_uppercase, digits
-
 from django.contrib.auth import login
 from django.contrib.auth.tokens import default_token_generator
+from django.contrib.auth.views import PasswordResetView
 from django.core.mail import send_mail
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
@@ -11,7 +9,7 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.views import View
 from django.views.generic import CreateView, UpdateView
 
-from users.forms import UserRegisterForm, UserProfileForm
+from users.forms import UserRegisterForm, UserProfileForm, UserForgotPasswordForm
 from users.models import User
 
 
@@ -67,24 +65,40 @@ def email_confirmation_failed(request):
     return render(request, 'users/email_confirmation_failed.html')
 
 
-def new_password(request):
-    if request.method == 'POST':
-        email_ = request.POST.get('email')
-        user = User.objects.get(email=email_)
-        sequence = choices(digits, k=9)
-        sequence.extend(choices(ascii_lowercase, k=9))
-        sequence.extend(choices(ascii_uppercase, k=9))
-        new_password_ = ''.join(choices(sequence, k=9))
-        user.set_password(new_password_)
-        user.save()
-        send_mail(
-            'Востановление пароля',
-            f'Новый пароль {new_password_}',
-            'skyproglazunov@yandex.ru',
-            [user.email],  # Это поле "Кому" (можно указать список адресов)
-            fail_silently=False,  # Сообщать об ошибках («молчать ли об ошибках?»)
-        )
-    return render(request, 'users/password_reset.html')
+class UserForgotPasswordView(PasswordResetView):
+    """
+    Представление по сбросу пароля по почте
+    """
+    form_class = UserForgotPasswordForm
+    template_name = 'users/password_reset.html'
+    success_url = reverse_lazy('catalog:product_list')
+    success_message = 'Письмо с инструкцией по восстановлению пароля отправлена на ваш email'
+    subject_template_name = 'users/email/new_password_subject_mail.txt'
+    email_template_name = 'users/email/new_password_mail.html'
+
+
+class UserPasswordResetConfirmView(View):
+    def get(self, request, uidb64, token, pas):
+        try:
+            uid = urlsafe_base64_decode(uidb64)
+            user = User.objects.get(pk=uid)
+        except (TypeError, ValueError, OverflowError):
+            user = None
+
+        if user is not None and default_token_generator.check_token(user, token):
+            user.set_password(pas)
+            user.save()
+            return redirect('users:password_confirmed')
+        else:
+            return redirect('users:password_confirmation_failed')
+
+
+def password_confirmed(request):
+    return render(request, 'users/password_confirmed.html')
+
+
+def password_confirmation_failed(request):
+    return render(request, 'users/password_confirmation_failed.html')
 
 
 class ProfileView(UpdateView):
