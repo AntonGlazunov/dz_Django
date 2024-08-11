@@ -9,6 +9,7 @@
 </header>
 <main class="row g-2">
     {% for product in versions %}
+    {% if product.is_published %}
     <div class="col-3">
         <div class="card m-2">
             <h5 class="card-header">Хотите купить?</h5>
@@ -22,6 +23,7 @@
             </div>
         </div>
     </div>
+    {% endif %}
     {% endfor %}
 </main>
 {% endblock %}

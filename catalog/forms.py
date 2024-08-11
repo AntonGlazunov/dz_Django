@@ -46,8 +46,28 @@ class ProductForm(VisualFormMixin, forms.ModelForm):
         return cleaned_data
 
 
-class VersionForm(VisualFormMixin, forms.ModelForm):
+class ProductModerForm(VisualFormMixin, forms.ModelForm):
 
+    class Meta:
+        model = Product
+        fields = ('description', 'category', 'is_published')
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper.layout = Layout(Fieldset('Товары', 'description', 'category', 'is_published', ),
+                                    Submit('submit', 'Сохранить', css_class='button white'), )
+
+    def clean_description(self):
+        cleaned_data = self.cleaned_data.get('description')
+
+        if cleaned_data.lower() in ['казино', 'криптовалюта', 'крипта', 'биржа', 'дешево', 'бесплатно', 'обман',
+                                    'полиция', 'радар']:
+            raise forms.ValidationError('Ошибка, используется запрещенное описание')
+
+        return cleaned_data
+
+
+class VersionForm(VisualFormMixin, forms.ModelForm):
     class Meta:
         model = Version
         fields = '__all__'

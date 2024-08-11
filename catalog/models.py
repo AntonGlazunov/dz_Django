@@ -12,11 +12,26 @@ class Product(models.Model):
     create_at = models.DateField(auto_now_add=True, verbose_name='Дата создания БД')
     updated_at = models.DateField(auto_now=True, verbose_name='Дата обновления БД')
     user = models.ForeignKey('users.User', verbose_name='Владелец', on_delete=models.CASCADE, **NULLABLE)
+    is_published = models.BooleanField(default=True, verbose_name='Признак публикации')
 
     def __str__(self):
         return f'{self.name} {self.description} {self.price} {self.create_at} {self.updated_at}'
 
     class Meta:
+        permissions = [
+            (
+                'set_published',
+                'Отмена публикации'
+            ),
+            (
+                'set_description',
+                'Изменение описания'
+            ),
+            (
+                'set_category',
+                'Изменение категории'
+            )
+        ]
         verbose_name = 'Продукт'
         verbose_name_plural = 'Продукты'
 

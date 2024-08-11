@@ -1,14 +1,13 @@
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import PermissionDenied
 from django.db.models import OuterRef, Subquery
 from django.forms import inlineformset_factory
 from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
-from catalog.forms import ProductForm, VersionForm
+from catalog.forms import ProductForm, VersionForm, ProductModerForm
 from catalog.models import Product, Contact, UserFeedback, Version
-from users.models import User
 
 
 class ProductListView(ListView):
@@ -28,8 +27,8 @@ class ProductDetailView(DetailView):
 
 class ProductCreateView(LoginRequiredMixin, CreateView):
     model = Product
-    success_url = reverse_lazy('catalog:product_list')
     form_class = ProductForm
+    success_url = reverse_lazy('catalog:product_list')
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
@@ -76,6 +75,16 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_success_url(self):
         return reverse('catalog:product_detail', args=[self.kwargs.get('pk')])
+
+    def get_form_class(self):
+        user = self.request.user
+        if user == self.object.user or user.is_superuser:
+            return ProductForm
+        elif user.has_perm('catalog.set_published') and user.has_perm('catalog.set_description') and user.has_perm(
+                'catalog.set_category'):
+            return ProductModerForm
+        else:
+            raise PermissionDenied
 
 
 class ProductDeleteView(LoginRequiredMixin, DeleteView):
