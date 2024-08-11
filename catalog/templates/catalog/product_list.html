@@ -18,7 +18,9 @@
                 </h5>
                 <p class="card-text">{{ product.description | format_str }}</p>
                 <p class="card-text">{{ product.new_version_product }}</p>
+                {% if user == product.user or user.is_superuser or perms.catalog.set_published and perms.catalog.set_description and perms.catalog.set_category %}
                 <a href="{% url 'catalog:update_product' product.pk %}" class="btn btn-primary">Обновить информацию</a>
+                {% endif %}
                 <a href="{% url 'catalog:delete_product' product.pk %}" class="btn btn-danger">Удалить товар</a>
             </div>
         </div>
