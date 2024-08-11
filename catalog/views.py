@@ -1,3 +1,5 @@
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import OuterRef, Subquery
 from django.forms import inlineformset_factory
 from django.shortcuts import render
@@ -6,6 +8,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 
 from catalog.forms import ProductForm, VersionForm
 from catalog.models import Product, Contact, UserFeedback, Version
+from users.models import User
 
 
 class ProductListView(ListView):
@@ -23,7 +26,7 @@ class ProductDetailView(DetailView):
     model = Product
 
 
-class ProductCreateView(CreateView):
+class ProductCreateView(LoginRequiredMixin, CreateView):
     model = Product
     success_url = reverse_lazy('catalog:product_list')
     form_class = ProductForm
@@ -40,13 +43,17 @@ class ProductCreateView(CreateView):
     def form_valid(self, form):
         formset = self.get_context_data()['formset']
         self.object = form.save()
+        product = form.save(commit=False)
+        product.user = self.request.user
+        product.save()
         if formset.is_valid():
             formset.instance = self.object
             formset.save()
+
         return super().form_valid(form)
 
 
-class ProductUpdateView(UpdateView):
+class ProductUpdateView(LoginRequiredMixin, UpdateView):
     model = Product
     form_class = ProductForm
 
@@ -71,7 +78,7 @@ class ProductUpdateView(UpdateView):
         return reverse('catalog:product_detail', args=[self.kwargs.get('pk')])
 
 
-class ProductDeleteView(DeleteView):
+class ProductDeleteView(LoginRequiredMixin, DeleteView):
     model = Product
     success_url = reverse_lazy('catalog:product_list')
 
