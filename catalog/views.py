@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.cache import cache
 from django.core.exceptions import PermissionDenied
 from django.db.models import OuterRef, Subquery
 from django.forms import inlineformset_factory
@@ -7,7 +8,9 @@ from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from catalog.forms import ProductForm, VersionForm, ProductModerForm
-from catalog.models import Product, Contact, UserFeedback, Version
+from catalog.models import Product, Contact, UserFeedback, Version, Category
+from catalog.services import cash_category
+from config import settings
 
 
 class ProductListView(ListView):
@@ -15,9 +18,20 @@ class ProductListView(ListView):
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
-        version_product = Version.objects.filter(is_active=True, product=OuterRef('pk'))
-        context_data['versions'] = Product.objects.annotate(
-            new_version_product=Subquery(version_product.values('version_name')))
+        if settings.CACHE_ENABLE:
+            key = f'subject_list'
+            version_list = cache.get(key)
+            if version_list is None:
+                version_product = Version.objects.filter(is_active=True, product=OuterRef('pk'))
+                version_list = Product.objects.annotate(
+                    new_version_product=Subquery(version_product.values('version_name')))
+                cache.set(key, version_list)
+        else:
+            version_product = Version.objects.filter(is_active=True, product=OuterRef('pk'))
+            version_list = Product.objects.annotate(
+                new_version_product=Subquery(version_product.values('version_name')))
+
+        context_data['versions'] = version_list
         return context_data
 
 
@@ -103,3 +117,13 @@ def contact(request):
         'object_list': contact_list
     }
     return render(request, 'catalog/contact.html', context)
+
+
+class CategoryListView(ListView):
+    model = Category
+
+    def get_queryset(self):
+        categories = super().get_queryset()
+        cash_categories = cash_category(categories)
+        return cash_categories
+

@@ -1,0 +1,24 @@
+{% extends 'catalog/base.html' %}
+{% load my_tags %}
+{% block content %}
+<header>
+    <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+        <h1 class="display-4 fw-normal text-body-emphasis">Категори</h1>
+        <p class="fs-5 text-body-secondary">Вы находитесь на сайте, предназначенном для продажи товаров</p>
+    </div>
+</header>
+<main class="row g-2">
+    {% for category in object_list %}
+    <div class="col-3">
+        <div class="card m-2">
+            <h5 class="card-header">Категория</h5>
+            <div class="card-body">
+                <h5 class="card-title">{{ category.name }}
+                </h5>
+                <p class="card-text">{{ category.description | format_str }}</p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</main>
+{% endblock %}
